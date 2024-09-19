@@ -20,5 +20,4 @@ export const userSchema = createSelectSchema(usersTable, {
   username: z.string(),
 }).omit({
   passwordHash: true,
-  passwordSalt: true,
 });

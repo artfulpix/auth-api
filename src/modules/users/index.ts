@@ -36,7 +36,6 @@ const usersRoutes = app
         email,
         username,
         passwordHash: hashedPassword,
-        passwordSalt: "lsdjfklsd",
       });
 
       return ctx.json({ success: true }, 200);
