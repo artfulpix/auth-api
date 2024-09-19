@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "779954d1-a407-4f1c-8a12-1b9d5e68fe13",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "c5416119-3fe4-4ee3-86b0-e781e3790fac",
+  "prevId": "779954d1-a407-4f1c-8a12-1b9d5e68fe13",
   "tables": {
     "users": {
       "name": "users",
@@ -12,7 +12,7 @@
           "type": "bigint unsigned",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": true
         },
         "username": {
           "name": "username",
@@ -46,7 +46,7 @@
           "name": "status",
           "type": "enum('inactive','active','suspended')",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false,
           "default": "'active'"
         },
@@ -54,7 +54,7 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false,
           "default": "(now())"
         },

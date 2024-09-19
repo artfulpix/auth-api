@@ -1,6 +1,7 @@
 import { CustomHono } from "../../common/types";
 import { db } from "../../db/db";
 import { usersTable } from "../../db/schema/users";
+import { hashPasswordWithArgon } from "../../lib/argon2id";
 
 import usersRoutesConfig from "./routes";
 
@@ -15,8 +16,6 @@ const usersRoutes = app
     const user = await db
       .select({
         id: usersTable.id,
-        firstName: usersTable.firstName,
-        lastName: usersTable.lastName,
       })
       .from(usersTable);
 
@@ -28,22 +27,25 @@ const usersRoutes = app
       200
     );
   })
-  .openapi(usersRoutesConfig.getUsers, async (ctx) => {
-    const user = await db
-      .select({
-        id: usersTable.id,
-        firstName: usersTable.firstName,
-        lastName: usersTable.lastName,
-      })
-      .from(usersTable);
+  .openapi(usersRoutesConfig.createUsers, async (ctx) => {
+    const { email, password, username } = await ctx.req.json();
+    const hashedPassword = await hashPasswordWithArgon(password);
 
-    return ctx.json(
-      {
-        success: true,
-        data: { user },
-      },
-      200
-    );
+    try {
+      await db.insert(usersTable).values({
+        email,
+        username,
+        passwordHash: hashedPassword,
+        passwordSalt: "lsdjfklsd",
+      });
+
+      return ctx.json({ success: true }, 200);
+    } catch (error) {
+      return ctx.json(
+        { success: false, error: (error as any).sqlMessage },
+        400
+      );
+    }
   });
 
 export type AppUsersType = typeof usersRoutes;

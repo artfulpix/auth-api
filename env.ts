@@ -25,6 +25,7 @@ export const env = createEnv({
     DB_PASSWORD: z.string(),
     DB_NAME: z.string(),
     DB_PORT: z.string(),
+    ARGON_SECRET: z.string(),
   },
 
   runtimeEnv: process.env,

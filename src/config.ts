@@ -101,7 +101,7 @@ export const config = {
     "bg-red-300",
   ],
 
-  sensitiveFields: ["hashedPassword", "unsubscribeToken"] as const,
+  sensitiveFields: ["passwordHash", "passwordSalt"] as const,
   // OAuth providers
   oauthProviderOptions: ["github", "google", "microsoft"] as const,
   enabledOauthProviders: ["github"] as const,
@@ -173,6 +173,9 @@ export const config = {
     countries: ["fr", "de", "nl", "ua", "us", "gb"],
     timezones: [],
   },
+
+  // Users Status
+  userStatus: ["inactive", "active", "suspended"],
 };
 
 export default config;

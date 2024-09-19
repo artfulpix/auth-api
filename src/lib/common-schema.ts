@@ -1,6 +1,8 @@
 import { z } from "zod";
 import config from "../config";
 
+export const passwordSchema = z.string().min(8).max(100);
+
 export const entityTypeSchema = z.enum(config.entityTypes);
 
 export const errorSchema = z.object({
