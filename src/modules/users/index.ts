@@ -1,6 +1,6 @@
 import { CustomHono } from "../../common/types";
 import { db } from "../../db/db";
-import { usersTable } from "../../db/schema/users";
+import { safeUserSelect, usersTable } from "../../db/schema/users";
 import { hashPasswordWithArgon } from "../../lib/argon2id";
 
 import usersRoutesConfig from "./routes";
@@ -15,7 +15,7 @@ const usersRoutes = app
   .openapi(usersRoutesConfig.getUsers, async (ctx) => {
     const user = await db
       .select({
-        id: usersTable.id,
+        ...safeUserSelect,
       })
       .from(usersTable);
 
@@ -27,6 +27,9 @@ const usersRoutes = app
       200
     );
   })
+  /*
+   * Create a user
+   */
   .openapi(usersRoutesConfig.createUsers, async (ctx) => {
     const { email, password, username } = await ctx.req.json();
     const hashedPassword = await hashPasswordWithArgon(password);

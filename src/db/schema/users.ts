@@ -12,11 +12,12 @@ import {
   bigint,
 } from "drizzle-orm/mysql-core";
 import config from "../../config";
+import { omitKeys } from "../../lib/omit";
 
 export const usersTable = mysqlTable(
   "users",
   {
-    id: bigint("id", { unsigned: true, mode: "bigint" })
+    id: bigint("id", { unsigned: true, mode: "number" })
       .primaryKey()
       .autoincrement(),
     username: varchar("username", { length: 50 }).unique().notNull(),
@@ -36,6 +37,8 @@ export const usersTable = mysqlTable(
     };
   }
 );
+
+export const safeUserSelect = omitKeys(usersTable, config.sensitiveFields);
 
 export type UnsafeUserModel = typeof usersTable.$inferSelect;
 export type InsertUserModel = typeof usersTable.$inferInsert;

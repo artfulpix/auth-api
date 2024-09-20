@@ -101,7 +101,7 @@ export const config = {
     "bg-red-300",
   ],
 
-  sensitiveFields: ["passwordHash", "passwordSalt"] as const,
+  sensitiveFields: ["passwordHash"] as const,
   // OAuth providers
   oauthProviderOptions: ["github", "google", "microsoft"] as const,
   enabledOauthProviders: ["github"] as const,
