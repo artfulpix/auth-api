@@ -1,8 +1,8 @@
+import { cors } from "hono/cors";
 import { secureHeaders } from "hono/secure-headers";
 import { CustomHono } from "../common/types";
-import { logger } from "./logger/logger";
 import { logEvent } from "./logger/log-event";
-import { cors } from "hono/cors";
+import { logger } from "./logger/logger";
 
 const app = new CustomHono();
 
@@ -22,11 +22,11 @@ app.get("/ping", (c) => c.text("pong"));
 app.use("*", logger(logEvent));
 
 const corsOptions = {
-  //   origin: config.frontendUrl,
-  origin: ["*"],
-  credentials: true,
-  allowMethods: ["GET", "HEAD", "PUT", "POST", "DELETE"],
-  allowHeaders: [],
+	//   origin: config.frontendUrl,
+	origin: ["*"],
+	credentials: true,
+	allowMethods: ["GET", "HEAD", "PUT", "POST", "DELETE"],
+	allowHeaders: [],
 };
 
 // CORS

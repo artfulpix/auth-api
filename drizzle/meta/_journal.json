@@ -1,27 +1,27 @@
 {
-  "version": "7",
-  "dialect": "mysql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1726720887690,
-      "tag": "0000_useful_crusher_hogan",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1726732926407,
-      "tag": "0001_stormy_mole_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1726744013462,
-      "tag": "0002_free_zarek",
-      "breakpoints": true
-    }
-  ]
+	"version": "7",
+	"dialect": "mysql",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1726720887690,
+			"tag": "0000_useful_crusher_hogan",
+			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "5",
+			"when": 1726732926407,
+			"tag": "0001_stormy_mole_man",
+			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "5",
+			"when": 1726744013462,
+			"tag": "0002_free_zarek",
+			"breakpoints": true
+		}
+	]
 }

@@ -10,15 +10,15 @@ import usersRoutes from "./modules/users";
 // import middlewares from "./middlewares";
 
 // Set default hook to catch validation errors
-const app = new CustomHono({
-  defaultHook,
+const baseApp = new CustomHono({
+	defaultHook,
 });
 
 // Add global middleware
-app.route("", middlewares);
+baseApp.route("/", middlewares);
 
 // Init OpenAPI docs
-docs(app);
+docs(baseApp);
 
 // Not found handler
 // app.notFound((ctx) => {
@@ -35,6 +35,5 @@ docs(app);
 // });
 
 // Add routes for each module
-app.route("/me", meRoutes).route("/users", usersRoutes);
 
-export default app;
+export default baseApp;

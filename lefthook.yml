@@ -1,0 +1,8 @@
+pre-commit:
+  commands:
+    type-check:
+      run: npm run check:types && npm run format:safe
+    check:
+      glob: "./src/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      stage_fixed: true

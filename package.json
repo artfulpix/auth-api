@@ -1,31 +1,37 @@
 {
-  "name": "app",
-  "type": "module",
-  "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "generate:migration": "npx drizzle-kit generate",
-    "sync:db": "npx drizzle-kit push"
-  },
-  "dependencies": {
-    "@hono/node-server": "^1.12.2",
-    "@hono/zod-openapi": "^0.16.0",
-    "@logtail/node": "^0.5.0",
-    "@scalar/hono-api-reference": "^0.5.144",
-    "@t3-oss/env-core": "^0.11.1",
-    "dotenv": "^16.4.5",
-    "drizzle-orm": "^0.33.0",
-    "drizzle-zod": "^0.5.1",
-    "hono": "^4.5.11",
-    "mysql2": "^3.11.0",
-    "nanoid": "^5.0.7",
-    "oslo": "^1.2.1",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.17",
-    "drizzle-kit": "^0.24.2",
-    "tsup": "^8.2.4",
-    "tsx": "^4.7.1",
-    "typescript": "^5.6.2"
-  }
+	"name": "app",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"check:types": "npx @biomejs/biome lint ./src",
+		"format:safe": "npx @biomejs/biome format --write ./src",
+		"generate:migration": "npx drizzle-kit generate",
+		"sync:db": "npx drizzle-kit push"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.12.2",
+		"@hono/swagger-ui": "^0.4.1",
+		"@hono/zod-openapi": "^0.16.0",
+		"@hono/zod-validator": "^0.2.2",
+		"@logtail/node": "^0.5.0",
+		"@scalar/hono-api-reference": "^0.5.144",
+		"@t3-oss/env-core": "^0.11.1",
+		"dotenv": "^16.4.5",
+		"drizzle-orm": "^0.33.0",
+		"drizzle-zod": "^0.5.1",
+		"hono": "^4.5.11",
+		"mysql2": "^3.11.0",
+		"nanoid": "^5.0.7",
+		"oslo": "^1.2.1",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.2",
+		"@types/node": "^20.11.17",
+		"drizzle-kit": "^0.24.2",
+		"lefthook": "^1.7.15",
+		"tsup": "^8.2.4",
+		"tsx": "^4.7.1",
+		"typescript": "^5.6.2"
+	}
 }

@@ -1,23 +1,23 @@
+import { z } from "@hono/zod-openapi";
 import { createSelectSchema } from "drizzle-zod";
-import { z } from "zod";
 
-import { passwordSchema } from "../../lib/common-schema";
-import { usersTable } from "../../db/schema/users";
 import config from "../../config";
-
-export const userCreateSchema = z.object({
-  email: z.string().email(),
-  username: z.string(),
-  password: passwordSchema,
-});
+import { usersTable } from "../../db/schema/users";
+import { passwordSchema } from "../../lib/common-schema";
 
 export const userSchema = createSelectSchema(usersTable, {
-  id: z.bigint(),
-  createdAt: z.date(),
-  email: z.string().email(),
-  emailVerified: z.boolean(),
-  status: z.enum(config.userStatus as [string]),
-  username: z.string(),
+	id: z.bigint(),
+	createdAt: z.date(),
+	email: z.string().email(),
+	emailVerified: z.boolean(),
+	status: z.enum(config.userStatus as [string]),
+	username: z.string().min(3),
 }).omit({
-  passwordHash: true,
+	passwordHash: true,
+});
+
+export const userCreateSchema = z.object({
+	email: userSchema.shape.email,
+	username: z.string().min(3),
+	password: passwordSchema,
 });
