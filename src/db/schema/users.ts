@@ -40,6 +40,7 @@ export const usersTable = mysqlTable(
 
 export const safeUserSelect = omitKeys(usersTable, config.sensitiveFields);
 
+export type UserTable = typeof usersTable;
 export type UnsafeUserModel = typeof usersTable.$inferSelect;
 export type InsertUserModel = typeof usersTable.$inferInsert;
 export type UserModel = Omit<

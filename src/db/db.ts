@@ -10,3 +10,5 @@ export const connection = await mysql.createConnection({
 });
 
 export const db = drizzle(connection, { logger: true });
+
+export type Db = typeof db;

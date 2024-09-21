@@ -2,8 +2,9 @@ import { createRoute } from "@hono/zod-openapi";
 import {
   errorResponses,
   successWithoutDataSchema,
+  successWithPaginationSchema,
 } from "../../lib/common-responses";
-import { userCreateSchema } from "./schema";
+import { userCreateSchema, userSchema } from "./schema";
 
 class UsersRoutesConfig {
   public getUsers = createRoute({
@@ -20,9 +21,9 @@ class UsersRoutesConfig {
       200: {
         description: "Users",
         content: {
-          //   'application/json': {
-          //     schema: successWithPaginationSchema(userSchema),
-          //   },
+          "application/json": {
+            schema: successWithPaginationSchema(userSchema),
+          },
         },
       },
       ...errorResponses,

@@ -17,7 +17,5 @@ export const omitKeys = <T extends TableConfig, K extends keyof T["columns"]>(
     }
   }
 
-  console.log(newObj);
-
   return newObj as SelectedFields; // Cast to correct type before returning
 };

@@ -2,10 +2,12 @@ import { CustomHono } from "../../common/types";
 import { db } from "../../db/db";
 import { safeUserSelect, usersTable } from "../../db/schema/users";
 import { hashPasswordWithArgon } from "../../lib/argon2id";
+import { UserDataAccess } from "./data-access";
 
 import usersRoutesConfig from "./routes";
 
 const app = new CustomHono();
+const dataAccess = new UserDataAccess(db, usersTable);
 
 // Users endpoints
 const usersRoutes = app
@@ -13,16 +15,14 @@ const usersRoutes = app
    * Get list of users
    */
   .openapi(usersRoutesConfig.getUsers, async (ctx) => {
-    const user = await db
-      .select({
-        ...safeUserSelect,
-      })
-      .from(usersTable);
+    const { data, total } = await dataAccess.findAll({
+      columns: safeUserSelect,
+    });
 
     return ctx.json(
       {
         success: true,
-        data: { user },
+        data: { items: [...(data as [])], total },
       },
       200
     );
@@ -35,9 +35,9 @@ const usersRoutes = app
     const hashedPassword = await hashPasswordWithArgon(password);
 
     try {
-      await db.insert(usersTable).values({
-        email,
+      await dataAccess.create({
         username,
+        email,
         passwordHash: hashedPassword,
       });
 
